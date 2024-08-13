@@ -1,0 +1,11 @@
+.buttonMenu {
+    display: none;
+}
+
+/*media 875px*/
+
+@media (max-width: 875px) {
+    .buttonMenu {
+        display: block;
+    }
+}

@@ -1,0 +1,7 @@
+pacakage-lock.json
+yarn.lock
+node_modules/
+tsconfig.tsbuildinfo
+.next/
+.husky/
+.env
