@@ -18,7 +18,7 @@ const handleList = async (page: number): Promise<TableData<AdoptionListResponse>
 
 const columns: Array<string> = ['animal', 'volunteer', 'adopter', 'status'];
 
-const CrudTable = () => {
+const CrudTable = (): JSX.Element => {
   return (
     <TableComponent<AdoptionListResponse>
       Form={Form}

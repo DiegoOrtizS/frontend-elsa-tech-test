@@ -6,7 +6,7 @@ import { RegisterPayload } from "@/services/elsa_back/auth/register/payload";
 import { ElsaBackApi } from "@/services/elsa_back/ElsaBackApi";
 import { TableData } from "@/app/components/Table";
 
-export type UserListResponse = ListResponse<RegisterPayload> & { id: string };
+export interface UserListResponse extends ListResponse<RegisterPayload> { id: string }
 
 
 export const userList = async (page: number): Promise<TableData<UserListResponse>> => {

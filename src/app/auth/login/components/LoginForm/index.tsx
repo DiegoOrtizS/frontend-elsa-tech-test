@@ -34,6 +34,7 @@ export function LoginForm(): JSX.Element {
                 firstName: resp.user.firstName,
                 lastName: resp.user.lastName,
                 email: resp.user.email,
+                id: resp.user.id
             });
             router.push("/dashboard");
         } catch (error) {

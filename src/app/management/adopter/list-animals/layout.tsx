@@ -17,7 +17,7 @@ export default function DashboardLayout({
 
     useLayoutEffect((): void => {
         if (user?.role) {
-            if (user.role === "requester")
+            if (user.role === "adopter")
                 setAuthorized(true);
             else {
                 openAlertMessage({
@@ -30,7 +30,7 @@ export default function DashboardLayout({
             }
         }
     }, [user]);
-    
+
     return (
         <>
             <Navbar />

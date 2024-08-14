@@ -17,7 +17,7 @@ export default function DashboardLayout({
 
     useLayoutEffect((): void => {
         if (user?.role) {
-            if (user.role === "approver")
+            if (user.role === "volunteer")
                 setAuthorized(true);
             else {
                 openAlertMessage({

@@ -5,7 +5,7 @@ import { TError } from '@/domain/errors/ErrorFactory';
 import { updateUser } from '@/services/elsa_back/user/patch';
 import { ShouldRefreshProps } from './UserForm';
 
-type UserEditFormProps = {
+interface UserEditFormProps extends ShouldRefreshProps {
     item: {
         user: {
             firstName: string;
@@ -16,7 +16,7 @@ type UserEditFormProps = {
         role: string;
         id: string;
     }
-} & ShouldRefreshProps;
+}
 
 export const UserEditForm: React.FC<UserEditFormProps> = ({
     item,

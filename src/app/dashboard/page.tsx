@@ -3,7 +3,7 @@ import { useGlobalContext } from "../context";
 import { useLayoutEffect, useMemo } from "react";
 import { Box } from "@mui/material";
 import { Module } from "@/domain/interface/Module";
-import { DataObject, Settings } from "@mui/icons-material";
+import { DataObject, Settings, AddCircle } from "@mui/icons-material";
 
 import { UserBanner, ModuleCard } from "./components";
 
@@ -36,28 +36,44 @@ export default function Dashboard(): JSX.Element {
                 role: "admin"
             },
             {
-                title: "Creación de proveedores",
+                title: "Listar animales",
                 description: "Lorem ipsum",
                 icon: <DataObject htmlColor="#62569A" />,
                 backgroundColor: "#DDD6FE",
-                link: "/management/supplier/register",
-                role: "requester",
+                link: "/management/volunteer/list-animals",
+                role: "volunteer",
             },
             {
-                title: "Registro de solicitudes de compra",
+                title: "Listar adoptantes",
                 description: "Lorem ipsum",
                 icon: <DataObject htmlColor="#62569A" />,
                 backgroundColor: "#DDD6FE",
-                link: "/management/purchase-request/register",
-                role: "requester"
+                link: "/management/volunteer/list-adopters",
+                role: "volunteer",
             },
             {
-                title: "Ver solicitudes de compra pendientes",
+                title: "Listar adopciones",
                 description: "Lorem ipsum",
                 icon: <DataObject htmlColor="#62569A" />,
                 backgroundColor: "#DDD6FE",
-                link: "/management/purchase-request/pending",
-                role: "approver"
+                link: "/management/volunteer/list-adoptions",
+                role: "volunteer",
+            },
+            {
+                title: "Listar animales",
+                description: "Lorem ipsum",
+                icon: <DataObject htmlColor="#62569A" />,
+                backgroundColor: "#DDD6FE",
+                link: "/management/adopter/list-animals",
+                role: "adopter",
+            },
+            {
+                title: "Solicitar adopción",
+                description: "Lorem ipsum",
+                icon: <AddCircle htmlColor="#62569A" />,
+                backgroundColor: "#DDD6FE",
+                link: "/management/adopter/post-adoption",
+                role: "adopter",
             }
         ];
         return m.filter((module) => module.role === user?.role || module.role === "all");

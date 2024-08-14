@@ -6,7 +6,7 @@ import { AdoptionPayload } from "@/services/elsa_back/adoption/post/payload";
 import { ElsaBackApi } from "@/services/elsa_back/ElsaBackApi";
 import { TableData } from "@/app/components/Table";
 
-export type AdoptionListResponse = ListResponse<AdoptionPayload> & { id: string };
+export interface AdoptionListResponse extends ListResponse<AdoptionPayload> { id: string }
 
 
 export const adoptionList = async (page: number): Promise<TableData<AdoptionListResponse>> => {

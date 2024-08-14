@@ -4,14 +4,21 @@ import { useGlobalContext } from '@/app/context';
 import { TError } from '@/domain/errors/ErrorFactory';
 import { createAdoption } from '@/services/elsa_back/adoption/post';
 
-export type ShouldRefreshProps = {
+export interface ShouldRefreshProps {
     setShouldRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
-export const Form: React.FC<ShouldRefreshProps> = ({ setShouldRefresh }: ShouldRefreshProps) => {
+interface FormProps extends ShouldRefreshProps {
+    adopterIdPrev?: string;
+}
+
+export const Form: React.FC<FormProps> = ({ 
+    adopterIdPrev,
+    setShouldRefresh 
+}: FormProps) => {
     const [animalId, setAnimalId] = useState("");
-    const [volunteerId, setVolunteerId] = useState("");
-    const [adopterId, setAdopterId] = useState("");
+    const [volunteerId, setVolunteerId] = useState<string | null>(null);
+    const [adopterId, setAdopterId] = useState(adopterIdPrev || "");
     const [status, setStatus] = useState("in_progress");
 
     const { openAlertMessage, setOpenLoading } = useGlobalContext();
@@ -69,7 +76,7 @@ export const Form: React.FC<ShouldRefreshProps> = ({ setShouldRefresh }: ShouldR
                     setAnimalId(e.target.value);
                 }}
             />
-            <TextField
+            {!adopterIdPrev && (<TextField
                 label="Volunteer ID"
                 variant="outlined"
                 fullWidth
@@ -79,13 +86,15 @@ export const Form: React.FC<ShouldRefreshProps> = ({ setShouldRefresh }: ShouldR
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                     setVolunteerId(e.target.value);
                 }}
-            />
+            />)}
             <TextField
                 label="Adopter ID"
                 variant="outlined"
                 fullWidth
                 margin="normal"
                 name="Adopter ID"
+                value={adopterIdPrev || ""}
+                disabled={adopterIdPrev ? true : false}
                 required={true}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
                     setAdopterId(e.target.value);
@@ -95,6 +104,7 @@ export const Form: React.FC<ShouldRefreshProps> = ({ setShouldRefresh }: ShouldR
                 <InputLabel>Status</InputLabel>
                 <Select
                     value={status}
+                    disabled={adopterIdPrev ? true : false}
                     onChange={(e: SelectChangeEvent<string>): void => {
                         setStatus(e.target.value);
                     }}

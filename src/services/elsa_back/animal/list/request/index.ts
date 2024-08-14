@@ -6,7 +6,9 @@ import { AnimalPayload } from "@/services/elsa_back/animal/post/payload";
 import { ElsaBackApi } from "@/services/elsa_back/ElsaBackApi";
 import { TableData } from "@/app/components/Table";
 
-export type AnimalListResponse = ListResponse<AnimalPayload> & { id: string };
+export interface AnimalListResponse extends ListResponse<AnimalPayload> {
+    id: string;
+}
 
 
 export const animalList = async (page: number): Promise<TableData<AnimalListResponse>> => {

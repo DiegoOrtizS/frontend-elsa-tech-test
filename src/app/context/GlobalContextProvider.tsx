@@ -15,6 +15,7 @@ export const GlobalContextProvider = ({
     const [sectionTitle, setSectionTitle] = useState<string>("");
     const [menuOptions, setMenuOptions] = useState<MenuOption[]>([]);
     const [user, setUser] = useState<UserWithRole | undefined>({
+        id: "",
         lastName: "",
         firstName: "",
         email: "",

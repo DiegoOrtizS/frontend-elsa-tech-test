@@ -5,9 +5,9 @@ import { TError } from '@/domain/errors/ErrorFactory';
 import { InputPasswordReveal } from '@/app/components/Password';
 import { register } from '@/services/elsa_back/auth/register/request';
 
-export type ShouldRefreshProps = {
+export interface ShouldRefreshProps {
     setShouldRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 export const UserForm: React.FC<ShouldRefreshProps> = ({ setShouldRefresh }: ShouldRefreshProps) => {
     const [firstName, setFirstName] = useState("");

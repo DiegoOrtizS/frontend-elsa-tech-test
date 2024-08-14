@@ -4,9 +4,9 @@ import { useGlobalContext } from '@/app/context';
 import { TError } from '@/domain/errors/ErrorFactory';
 import { createAnimal } from '@/services/elsa_back/animal/post';
 
-export type ShouldRefreshProps = {
+export interface ShouldRefreshProps {
     setShouldRefresh: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 export const Form: React.FC<ShouldRefreshProps> = ({ setShouldRefresh }: ShouldRefreshProps) => {
     const [name, setName] = useState("");

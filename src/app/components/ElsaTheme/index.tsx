@@ -31,6 +31,7 @@ export const ElsaTheme = ({
                     firstName: resp.user.firstName,
                     lastName: resp.user.lastName,
                     email: resp.user.email,
+                    id: resp.user.id
                 });
             })
             .finally(() => {

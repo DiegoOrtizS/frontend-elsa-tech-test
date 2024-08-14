@@ -5,7 +5,7 @@ import { TError } from '@/domain/errors/ErrorFactory';
 import { updateAdoption } from '@/services/elsa_back/adoption/patch';
 import { ShouldRefreshProps } from './Form';
 
-type EditFormProps = {
+interface EditFormProps extends ShouldRefreshProps {
     item: {
         id: string;
         animal: {
@@ -19,7 +19,7 @@ type EditFormProps = {
         }
         status: string;
     }
-} & ShouldRefreshProps;
+}
 
 export const Form: React.FC<EditFormProps> = ({
     item,
@@ -42,9 +42,7 @@ export const Form: React.FC<EditFormProps> = ({
                 adopterId,
                 status,
             });
-            console.log('Adoption updated successfully');
             setShouldRefresh((prev) => !prev);
-            console.log('Adoption updated successfully');
 
             openAlertMessage({
                 horizontal: "center",

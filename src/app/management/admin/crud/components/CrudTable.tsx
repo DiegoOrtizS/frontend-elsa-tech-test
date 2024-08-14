@@ -2,8 +2,8 @@ import React from 'react';
 import TableComponent, { TableData } from '@/app/components/Table';
 import { userList, UserListResponse } from '@/services/elsa_back/user/list';
 import { userDelete } from '@/services/elsa_back/user/delete';
-import { UserForm } from '../../accounts/components';
-import UserEditForm from '../../accounts/components/UserEditForm';
+import UserForm from '../../accounts/components/UserForm';
+import { UserEditForm } from '../../accounts/components/UserEditForm';
 
 const handleDelete = async (id: string): Promise<void> => {
   // Define your logic for deleting an item
@@ -18,7 +18,7 @@ const handleList = async (page: number): Promise<TableData<UserListResponse>> =>
 
 const columns: Array<string> = ['id', 'user', 'role'];
 
-const CrudTable = () => {
+const CrudTable = (): JSX.Element => {
   return (
     <TableComponent<UserListResponse>
       Form={UserForm}

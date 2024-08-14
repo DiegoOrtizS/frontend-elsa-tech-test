@@ -8,6 +8,6 @@ export interface AdoptionPayloadPatch extends Payload {
 
 export interface AdoptionPayload extends Payload {
     animalId: string;
-    volunteerId: string;
+    volunteerId: string | null;
     adopterId: string;
 }

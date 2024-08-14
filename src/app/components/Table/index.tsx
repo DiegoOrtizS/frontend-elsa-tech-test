@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, Paper, Dialog, FormControl } from '@mui/material';
+import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, Paper, Dialog } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 import { ShouldRefreshProps } from '@/app/management/admin/accounts/components';
 
 interface TableProps<T> {
-  Form: React.FC<ShouldRefreshProps>;
-  EditForm: React.FC<any>;
-  handleDelete: (id: string) => Promise<void>;
+  Form?: React.FC<ShouldRefreshProps>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  EditForm?: React.FC<any>;
+  handleDelete?: (id: string) => Promise<void>;
   handleList: (page: number) => Promise<TableData<T>>;
   columns: Array<string>;
 }
@@ -24,7 +25,7 @@ const TableComponent = <T,>({
   handleDelete,
   handleList,
   columns,
-}: TableProps<T>) => {
+}: TableProps<T>): JSX.Element => {
   const [form, setForm] = useState<string>('');
   const [shouldRefetch, setShouldRefetch] = useState<boolean>(false);
   const [clickedItem, setClickedItem] = useState<T | null>(null);
@@ -45,30 +46,28 @@ const TableComponent = <T,>({
     fetchData();
   }, [currentPage, shouldRefetch]);
 
-  const handlePageChange = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handlePageChange = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number): void => {
     setCurrentPage(newPage + 1);
   };
 
   const handleDeleteClick = async (id: string): Promise<void> => {
-    await handleDelete(id);
+    if (handleDelete) {
+      await handleDelete(id);
+    }
     setShouldRefetch(prev => !prev);
   };
 
   return (
     <Paper>
-      <IconButton onClick={(): void => setForm("register")}>
+      {Form && (<IconButton onClick={(): void => setForm("register")}>
         <AddIcon /> Add New
-      </IconButton>
+      </IconButton>)}
       <Dialog open={form !== ""} onClose={(): void => setForm("")}>
-        {form === "register" ? (
-          <Form 
-            setShouldRefresh={setShouldRefetch}
-          /> ) : form === "edit" ? (
-            <EditForm
-              item={clickedItem}
-              setShouldRefresh={setShouldRefetch}
-            />) : null}
-        
+        {form === "register" && Form ? (
+          <Form setShouldRefresh={setShouldRefetch} />
+        ) : form === "edit" && EditForm ? (
+          <EditForm item={clickedItem} setShouldRefresh={setShouldRefetch} />
+        ) : null}
       </Dialog>
       <TableContainer>
         <Table>
@@ -81,6 +80,7 @@ const TableComponent = <T,>({
             </TableRow>
           </TableHead>
           <TableBody>
+            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
             {data.results.map((item: any) => (
               <TableRow key={String(item.id)}>
                 {columns.map((col) => (
@@ -89,16 +89,17 @@ const TableComponent = <T,>({
                   </TableCell>
                 ))}
                 <TableCell>
-                  <IconButton onClick={(): void => {
+                  {EditForm && <IconButton onClick={(): void => {
                     setForm("edit");
                     setClickedItem(item);
                     setShouldRefetch(!shouldRefetch);
                   }}>
                     <EditIcon />
-                  </IconButton>
+                  </IconButton>}
+                  {handleDelete && (
                   <IconButton onClick={(): Promise<void> => handleDeleteClick(String(item.id))}>
                     <DeleteIcon />
-                  </IconButton>
+                  </IconButton>)}
                 </TableCell>
               </TableRow>
             ))}
